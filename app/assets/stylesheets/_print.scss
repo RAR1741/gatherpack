@@ -1,9 +1,13 @@
 .page {
   margin: 1rem;
   padding: 1rem;
-  border: 1px solid $greige-darkest;
+  border: 1px solid var(--pair-a-fg);
   page-break-before: always;
   page-break-after: always;
+  page-break-inside: avoid;
+}
+
+.card {
   page-break-inside: avoid;
 }
 
@@ -16,5 +20,13 @@
     border: none;
     margin: 0;
     padding: 0;
+  }
+
+  main {
+    min-height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
   }
 }

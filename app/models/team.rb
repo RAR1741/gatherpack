@@ -1,12 +1,14 @@
 class Team < ApplicationRecord
   has_neat_id :tm
   include CanBeHooked
+
   has_paper_trail versions: { class_name: "AuditLog" }
   belongs_to :team_type
   has_many :announcements
   has_many :badges
   has_many :events
   has_many :memberships, dependent: :destroy
+  has_many :membership_applications, dependent: :destroy
   has_many :people, through: :memberships
   has_many :events
   has_many :pages
@@ -14,7 +16,8 @@ class Team < ApplicationRecord
   belongs_to :parent, class_name: "Team", optional: true
   has_many :children, class_name: "Team", foreign_key: :parent_id, dependent: :nullify
   has_many :calendar_notes, as: :noteable
-  enum :join_permission, { added_by_admin: 0, added_by_manager: 1, added_by_current_member: 2, has_account: 3 }
+  has_many :questions
+  enum :join_permission, { added_by_admin: 0, added_by_manager: 1, added_by_current_member: 2, has_account: 3, requires_approval: 4 }
 
   validates :name, presence: true
   validates :join_permission, inclusion: { in: join_permissions.keys }
@@ -35,6 +38,14 @@ class Team < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     [ "team_type", "parent" ]
+  end
+
+  def siblings
+    if parent
+      Team.where(parent_id: parent_id).where.not(id: id)
+    else
+      []
+    end
   end
 
   def all_descendant_ids

@@ -15,7 +15,7 @@ gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 7"
+gem "puma", "~> 8"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
@@ -50,7 +50,8 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 2.0.1"
+gem "ruby-vips"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -81,56 +82,62 @@ end
 # to add back in once he gets it updated for rails 8
 # gem "solid_errors", github: "fractaledmind/solid_errors", branch: "main"
 
-gem "devise", "~> 4.9"
+gem "devise", "~> 5"
 
-gem "simple_form", "~> 5.3"
+gem "doorkeeper"
 
-gem "omniauth", "~> 2.1"
+gem "simple_form", "~> 5"
 
-gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "omniauth", "~> 2"
 
-gem "ransack", "~> 4.1"
+gem "omniauth-rails_csrf_protection", "~> 2"
 
-gem "kaminari", "~> 1.2"
+gem "ransack", "~> 4"
 
-gem "color", "~> 2.0"
+gem "kaminari", "~> 1"
 
-gem "pundit", "~> 2.3"
+gem "color", "~> 2"
+
+gem "pundit", "~> 2"
 
 gem "gretel", github: "wobschalli/gretel" # change to main gem once it has support for rails 8
 
-gem "money", "~> 6.19"
+gem "money", "~> 7"
 
-gem "money-rails", "~> 1.15"
+gem "money-rails", "~> 3"
 
-gem "spicy-proton", "~> 2.1"
+gem "spicy-proton", "~> 2"
 
-gem "paper_trail", "~> 17.0"
+gem "paper_trail", "~> 17"
 
 gem "postmark-rails", "~> 0.22.1"
 
 gem "pstore"
 
-gem "omniauth-google-oauth2", "~> 1.2"
+gem "omniauth-google-oauth2", "~> 1"
 
-gem "omniauth-discord", "~> 1.2"
+gem "omniauth-discord", "~> 1"
 
-gem "omniauth-github", "~> 2.0"
+gem "omniauth-github", "~> 2"
 
-gem "http", "~> 5.2"
+gem "http", "~> 6"
 
-gem "pmap", "~> 1.1"
+gem "pmap", "~> 1"
 
-gem "jbuilder", "~> 2.13"
+gem "jbuilder", "~> 2"
 
 gem "hotwire_combobox", "~> 0.4.0", github: "braddoeswebdev/hotwire_combobox"
 
-gem "stripe", "~> 17"
+gem "stripe", "~> 19"
 
-gem "dotenv", "~> 3.1"
+gem "dotenv", "~> 3"
 
-gem "pretender", "~> 0.6.0"
+gem "pretender", "~> 1.0"
 
 gem "neat_ids"
 
-gem "redcarpet", "~> 3.6"
+gem "redcarpet", "~> 3"
+
+gem "overmind", "~> 2"
+
+gem "herb", "~> 0.10.1"

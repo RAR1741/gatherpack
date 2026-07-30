@@ -7,7 +7,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-3">
-        <img src="<%= get_avatar_url(@checkin.person.avatar) %>">
+        <img src="<%= get_avatar_url_512(@checkin.person.avatar) %>">
       </div>
       <div class="col">
         <%= render "notes", notes: @checkin.notes %>
@@ -24,8 +24,8 @@
   </div>
   <div class="card-footer">
     <% if policy(@checkin).update? || policy(@checkin).destroy? %>
-      <%= link_to 'Edit', edit_event_checkin_path(@event, @checkin), class: 'btn btn-warning' if policy(@checkin).update? %>
-      <%= link_to 'Checkout', [@event, @checkin], class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } if policy(@checkin).destroy? %>
+      <%= link_to "Edit", edit_event_checkin_path(@event, @checkin), class: "btn btn-warning" if policy(@checkin).update? %>
+      <%= link_to "Checkout", [ @event, @checkin ], class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } if policy(@checkin).destroy? %>
     <% end %>
   </div>
 </div>

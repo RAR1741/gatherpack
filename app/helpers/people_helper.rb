@@ -3,6 +3,18 @@ module PeopleHelper
     avatar.attached? ? url_for(avatar) : asset_path("default_profile.png")
   end
 
+  def get_avatar_url_64(avatar)
+    avatar.attached? ? url_for(avatar.variant(resize_to_fill: [ 64, 64 ], format: :jpg)) : asset_path("default_profile.png")
+  end
+
+  def get_avatar_url_128(avatar)
+    avatar.attached? ? url_for(avatar.variant(resize_to_fill: [ 128, 128 ], format: :jpg)) : asset_path("default_profile.png")
+  end
+
+  def get_avatar_url_512(avatar)
+    avatar.attached? ? url_for(avatar.variant(resize_to_fill: [ 512, 512 ], format: :jpg)) : asset_path("default_profile.png")
+  end
+
   def get_joinable_teams(person, current_user)
     if current_user.admin?
       return Team.all.to_a
@@ -15,9 +27,9 @@ module PeopleHelper
     ).uniq.sort_by { |t| [ t.team_type.name, t.name ] }
   end
 
-  def person_as_badge(person, opt = nil)
+  def person_as_badge(person, **opts)
     content = i("user") + " " + person.identifier_name
-    if opt.present? && opt
+    if opts[:link]
       link_to person, class: "undecorated", 'data-turbo': false do
         tag.span content, class: "badge text-bg-primary"
       end

@@ -16,6 +16,7 @@ class EventsController < InternalController
   end
 
   def arrange
+    @event.checkins.each(&:refresh_fields)
     @field = CheckinField.find(params[:field_id]) rescue nil
     @responses = CheckinFieldResponse
       .includes(checkin: :person)
@@ -24,11 +25,18 @@ class EventsController < InternalController
   end
 
   def print
+    @event.checkins.each(&:refresh_fields)
     @field = CheckinField.find(params[:field_id]) rescue nil
+    @possible_values = @event.checkin_field_responses.where(checkin_field: @field).distinct.pluck(:response).compact.sort_by { |v| v || "zzzzz" }
+    @values = params[:values].present? ? @possible_values & params[:values] : @possible_values
+    @values = @possible_values if @values.empty?
+    @paged = params[:paged] == "true"
+    @notes = params[:notes] == "true"
     @responses = CheckinFieldResponse
       .includes(checkin: :person)
       .joins(:checkin)
       .where(checkin_field: @field, checkins: { event_id: @event.id })
+    @last_updated = @responses.maximum(:updated_at)
   end
 
   # GET /events/new
